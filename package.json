@@ -30,7 +30,8 @@
     "jsonwebtoken": "^9.0.2",
     "memorystore": "^1.6.7",
     "pg": "^8.16.3",
-    "zod": "^3.25.76"
+    "zod": "^3.25.76",
+    "tsx": "^4.20.6"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.16",
@@ -49,7 +50,6 @@
     "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "^4.1.16",
     "ts-node": "^10.9.2",
-    "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }
 }

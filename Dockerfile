@@ -6,9 +6,6 @@ RUN corepack enable pnpm && pnpm i --frozen-lockfile
 COPY . .
 RUN pnpm tailwindcss -i ./src/views/input.css -o ./public/css/tailwind.css -m
 
-# We want to not care about tsc errors, even though there are.
-RUN pnpm tsc || true
-
 # Production stage
 FROM node:24-alpine AS production
 WORKDIR /app
@@ -21,9 +18,8 @@ RUN corepack enable pnpm && pnpm i --prod --frozen-lockfile
 
 # Copy built assets from builder stage
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/src/views ./dist/views
+COPY --from=builder /app/src/views ./src
 COPY --from=builder /app/drizzle.config.ts .
 
-CMD ["node", "./dist/index.js"]
+CMD ["pnpm", "tsx", "src/index.ts"]
 
