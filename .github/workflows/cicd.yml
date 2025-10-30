@@ -48,4 +48,4 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd /srv
-            docker compose up -d it-tools
+            docker compose up -d --pull always it-tools
