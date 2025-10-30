@@ -21,8 +21,8 @@ rad.json
 #Test results file
 TestResults.xml
 node_modules
-pnpm-lock.yaml
 pnpm-workspace.yaml
+drizzle
 .env
 .drizzle
 dist

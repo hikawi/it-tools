@@ -1,5 +1,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
-
 <div class="flex w-full max-w-4xl flex-col items-center justify-center gap-8">
   <div
     class="flex w-full flex-col items-start gap-2 border-b-2 border-zinc-700 py-4"
@@ -7,100 +6,113 @@
     <h1
       class="dark:from-cotton-candy dark:to-cadillac from-cadillac to-bashful bg-gradient-to-r bg-clip-text text-3xl font-bold text-transparent"
     >
-      Hash
+      Base64 String
     </h1>
-
     <p class="w-full">
-      Hash a string of text into various digests using various hashing
-      algorithms, provided by CryptoJS.
+      Convert a data string into a more compact, usually used to encode bit
+      strings for images, base64 encoded string.
     </p>
   </div>
 
   <div class="flex w-full flex-col gap-4">
     <label class="flex flex-col gap-2 font-semibold">
-      String to hash
-      <input
-        type="text"
+      Input String
+      <textarea
         id="input-string"
-        class="focus:ring-bashful hover:ring-bashful/50 dark:focus:ring-cotton-candy dark:hover:ring-cotton-candy/50 h-12 rounded-md bg-zinc-300 px-4 py-2 font-normal ring-2 ring-transparent duration-200 outline-none placeholder:opacity-50 dark:bg-zinc-700"
-        placeholder="String..."
-        value="lunaluny"
-      />
-
+        class="h-32 resize-none rounded-md bg-zinc-300 px-4 py-2 font-normal ring-2 ring-transparent duration-200 outline-none placeholder:opacity-50 hover:ring-pink-500/50 focus:ring-pink-500 dark:bg-zinc-700 dark:hover:ring-purple-500/50 dark:focus:ring-purple-500"
+        placeholder="Enter string to encode/decode..."
+      >
+lunaluny</textarea
+      >
     </label>
 
-    <button
-      id="hash"
-      class="border-bashful bg-bashful hover:text-bashful dark:border-cotton-candy dark:bg-cotton-candy dark:hover:text-cotton-candy text-pearl cursor-pointer self-end rounded-md border-2 px-4 py-2 font-semibold duration-200 hover:bg-transparent dark:text-black"
-    >
-      Hash
-    </button>
+    <div class="flex flex-row gap-4 self-end">
+      <button
+        id="encode"
+        class="from-cadillac to-bashful dark:from-cotton-candy dark:to-cadillac text-pearl cursor-pointer rounded-md border-2 border-red-500 bg-gradient-to-r px-4 py-2 font-semibold duration-200 hover:bg-transparent dark:border-pink-500 dark:text-black dark:hover:bg-transparent"
+      >
+        Encode
+      </button>
+      <button
+        id="decode"
+        class="from-cadillac to-bashful dark:from-cotton-candy dark:to-cadillac text-pearl cursor-pointer rounded-md border-2 border-pink-500 bg-gradient-to-r px-4 py-2 font-semibold duration-200 hover:bg-transparent dark:border-purple-500 dark:text-black dark:hover:bg-transparent"
+      >
+        Decode
+      </button>
+    </div>
   </div>
 
-  <style>
-    #output-grid {
-      display: grid;
-      grid-template-columns: 5rem 1fr;
-      grid-template-rows: 3rem;
-    }
-  </style>
-
   <div class="flex w-full flex-col gap-4">
-    <h2 class="font-semibold">Hashed Results</h2>
+    <h2 class="font-semibold">Result</h2>
 
-    <div id="output-grid" class="items-center gap-4">
-      <h3 class="shrink-0 font-light">MD5</h3>
-      <div
-        class="flex h-full w-full items-center justify-between rounded-md bg-zinc-300 px-4 py-2 dark:bg-zinc-700"
+    <div
+      class="flex flex-col rounded-md bg-zinc-300 px-4 py-2 dark:bg-zinc-700"
+    >
+      <textarea
+        id="output-result"
+        readonly
+        class="h-32 w-full resize-none font-normal outline-none dark:bg-zinc-700 dark:text-white"
+        placeholder="Base64 encoded/decoded string will appear here"
+      ></textarea>
+      <button
+        id="output-copy"
+        class="dark:fill-pearl dark:hover:fill-pearl/50 group relative mt-2 shrink-0 cursor-pointer! self-end fill-zinc-950 hover:fill-zinc-950/50"
       >
-        <input type="text" readonly id="output-md5" class="w-full" />
-        <button
-          id="output-md5-copy"
-          class="dark:fill-pearl dark:hover:fill-pearl/50 group relative shrink-0 cursor-pointer! fill-zinc-950 hover:fill-zinc-950/50"
+        <span
+          class="dark:bg-pearl text-pearl absolute bottom-0 left-1/2 z-10 hidden -translate-x-1/2 -translate-y-full items-center justify-center rounded-md bg-zinc-500 px-4 py-2 font-semibold uppercase group-hover:flex dark:text-black"
+          >Copy</span
         >
-          <span
-            class="dark:bg-pearl text-pearl absolute bottom-0 left-1/2 z-10 hidden -translate-x-1/2 -translate-y-full items-center justify-center rounded-md bg-zinc-500 px-4 py-2 font-semibold uppercase group-hover:flex dark:text-black"
-            >Copy</span
-          >
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 -960 960 960"
-            class="size-6"
-          >
-            <path
-              d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"
-            />
-          </svg>
-        </button>
-      </div>
-
-      <h3 class="shrink-0 font-light">SHA-1</h3>
-      <div
-        class="flex h-full w-full items-center justify-between rounded-md bg-zinc-300 px-4 py-2 dark:bg-zinc-700"
-      >
-        <input type="text" readonly id="output-sha1" class="w-full" />
-        <button
-          id="output-sha1-copy"
-          class="dark:fill-pearl dark:hover:fill-pearl/50 group relative shrink-0 cursor-pointer! fill-zinc-950 hover:fill-zinc-950/50"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+          class="size-6"
         >
-          <span
-            class="dark:bg-pearl text-pearl absolute bottom-0 left-1/2 z-10 hidden -translate-x-1/2 -translate-y-full items-center justify-center rounded-md bg-zinc-500 px-4 py-2 font-semibold uppercase group-hover:flex dark:text-black"
-            >Copy</span
-          >
+          <path
+            d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
 
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 -960 960 960"
-            class="size-6"
-          >
-            <path
-              d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"
-            />
-          </svg>
-        </button>
-      </div>
+<script>
+  $(document).ready(function () {
+    $("#encode").click(() => {
+      const inputString = $("#input-string").val();
+      const outputResult = $("#output-result");
+      try {
+        const base64String = btoa(inputString);
+        outputResult.val(base64String);
+      } catch (error) {
+        outputResult.val("Error encoding string.");
+        console.error("Encoding error:", error);
+      }
+    });
 
-      <h3 class="shrink-0 font-light">SHA-256</h3>
-      <div
-        class="flex h-full w-full items-center justify-between rounded-md bg-zinc-300 px-4 py-2 dark:bg-zinc-700"
+    $("#decode").click(() => {
+      const inputString = $("#input-string").val();
+      const outputResult = $("#output-result");
+      try {
+        const decodedString = atob(inputString);
+        outputResult.val(decodedString);
+      } catch (error) {
+        outputResult.val("Error decoding Base64 string.");
+        console.error("Decoding error:", error);
+      }
+    });
+
+    $("#output-copy").click(() => {
+      const result = $("#output-result").val();
+      if (result) {
+        navigator.clipboard.writeText(result);
+        const copyButton = $("#output-copy");
+        const span = copyButton.find("span");
+        span.text("Copied!");
+        setTimeout(() => {
+          span.text("Copy");
+        }, 3000);
+      }
+    });
+  });
+</script>
