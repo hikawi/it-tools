@@ -3,6 +3,11 @@ import "dotenv/config";
 import express from "express";
 import path from "path";
 import mainRouter from "./routes/main-router";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // The application instance.
 const app = express();
